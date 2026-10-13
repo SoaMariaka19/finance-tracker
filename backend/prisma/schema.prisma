@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountType {
+  CHECKING
+  SAVINGS
+  CASH
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+model Account {
+  id           String        @id @default(uuid())
+  name         String
+  type         AccountType
+  balance      Int           @default(0) // en centimes
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+
+model Category {
+  id           String        @id @default(uuid())
+  name         String        @unique
+  monthlyLimit Int? // en centimes
+  transactions Transaction[]
+}
+
+model Transaction {
+  id        String          @id @default(uuid())
+  type      TransactionType
+  amount    Int // en centimes
+  date      DateTime
+  note      String?
+  createdAt DateTime        @default(now())
+
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@index([accountId, date])
+}
