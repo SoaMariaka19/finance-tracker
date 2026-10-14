@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 const LINKS = [
     { href: '/accounts', label: 'Comptes' },
     { href: '/categories', label: 'Catégories' },
+    { href: '/transactions', label: 'Transactions' },
+    { href: '/summary', label: 'Résumé' },
 ];
 
 export function Nav() {
@@ -13,7 +15,7 @@ export function Nav() {
 
     return (
         <header className="border-b border-slate-200 bg-white">
-            <nav className="mx-auto flex max-w-3xl items-center gap-6 px-4 py-3">
+            <nav className="mx-auto flex max-w-3xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
                 <span className="font-semibold text-slate-900">Finance Tracker</span>
                 {LINKS.map((link) => {
                     const active = pathname.startsWith(link.href);

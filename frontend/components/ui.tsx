@@ -22,10 +22,12 @@ const alertStyles: Record<AlertVariant, string> = {
 
 export function Alert({
                           variant,
+                          title,
                           messages,
                           children,
                       }: {
     variant: AlertVariant;
+    title?: string;
     messages?: string[];
     children?: ReactNode;
 }) {
@@ -34,6 +36,7 @@ export function Alert({
             role={variant === 'error' ? 'alert' : 'status'}
             className={`rounded-md border px-4 py-3 text-sm ${alertStyles[variant]}`}
         >
+            {title && <p className="font-semibold">{title}</p>}
             {messages?.map((message) => <p key={message}>{message}</p>)}
             {children}
         </div>
