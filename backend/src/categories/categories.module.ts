@@ -16,5 +16,6 @@ const QueryHandlers = [GetCategoriesHandler];
         ...QueryHandlers,
         { provide: CategoryRepository, useClass: PrismaCategoryRepository },
     ],
+    exports: [CategoryRepository],
 })
 export class CategoriesModule {}

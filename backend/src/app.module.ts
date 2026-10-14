@@ -3,8 +3,9 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { PrismaModule } from './prisma/prisma.module';
 import { AccountsModule } from './accounts/accounts.module';
 import {CategoriesModule} from "./categories/categories.module";
+import {TransactionsModule} from "./transactions/transactions.module";
 
 @Module({
-  imports: [CqrsModule.forRoot(), PrismaModule, AccountsModule, CategoriesModule],
+  imports: [CqrsModule.forRoot(), PrismaModule, AccountsModule, CategoriesModule, TransactionsModule],
 })
 export class AppModule {}

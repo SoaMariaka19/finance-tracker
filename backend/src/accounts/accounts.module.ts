@@ -17,5 +17,6 @@ const QueryHandlers = [GetAccountsHandler, GetAccountHandler];
         ...QueryHandlers,
         { provide: AccountRepository, useClass: PrismaAccountRepository },
     ],
+    exports: [AccountRepository],
 })
 export class AccountsModule {}
