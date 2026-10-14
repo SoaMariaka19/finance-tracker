@@ -12,6 +12,7 @@ import {
     primaryButtonClass,
     secondaryButtonClass,
 } from '@/components/ui';
+import {Loading} from "@/components/loading";
 
 function CategoryRow({ category }: { category: Category }) {
     const update = useUpdateCategory();
@@ -122,7 +123,7 @@ export function CategoryList() {
     const { data: categories, isPending, isError, error, refetch } = useCategories();
 
     if (isPending) {
-        return <p className="text-sm text-slate-500">Chargement des catégories…</p>;
+        return <Loading label="Chargement des catégories…" />;
     }
 
     if (isError) {

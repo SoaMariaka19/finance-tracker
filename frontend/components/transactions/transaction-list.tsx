@@ -7,6 +7,7 @@ import { formatAmount } from '@/lib/money';
 import { useTransactions } from '@/lib/queries/transactions';
 import type { Account } from '@/lib/types';
 import { Alert, Card, inputClass, secondaryButtonClass } from '@/components/ui';
+import {Loading} from "@/components/loading";
 
 export function TransactionList({ accounts }: { accounts: Account[] }) {
     const [filter, setFilter] = useState('');
@@ -40,7 +41,7 @@ export function TransactionList({ accounts }: { accounts: Account[] }) {
                 </select>
             </div>
 
-            {isPending && <p className="text-sm text-slate-500">Chargement des transactions…</p>}
+            {isPending && <Loading label="Chargement des transactions…" />}
 
             {isError && (
                 <Alert variant="error" messages={toMessages(error)}>

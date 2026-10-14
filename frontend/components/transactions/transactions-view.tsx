@@ -7,13 +7,14 @@ import { useCategories } from '@/lib/queries/categories';
 import { Alert, secondaryButtonClass } from '@/components/ui';
 import { TransactionForm } from './transaction-form';
 import { TransactionList } from './transaction-list';
+import {Loading} from "@/components/loading";
 
 export function TransactionsView() {
     const accounts = useAccounts();
     const categories = useCategories();
 
     if (accounts.isPending || categories.isPending) {
-        return <p className="text-sm text-slate-500">Chargement…</p>;
+        return <Loading label="Chargement…" />;
     }
 
     if (accounts.isError || categories.isError) {

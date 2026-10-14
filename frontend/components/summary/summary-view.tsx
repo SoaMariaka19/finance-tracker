@@ -9,6 +9,7 @@ import { useAccounts } from '@/lib/queries/accounts';
 import { useMonthlySummary } from '@/lib/queries/summary';
 import type { BudgetStatus, CategorySummary, MonthlySummary } from '@/lib/types';
 import { Alert, Card, inputClass, secondaryButtonClass } from '@/components/ui';
+import {Loading} from "@/components/loading";
 
 const STATUS_STYLES: Record<
     BudgetStatus,
@@ -138,7 +139,7 @@ export function SummaryView() {
     const summary = useMonthlySummary(effectiveAccountId, month);
 
     if (accounts.isPending) {
-        return <p className="text-sm text-slate-500">Chargement…</p>;
+        return <Loading label="Chargement…" />;
     }
 
     if (accounts.isError) {
@@ -198,7 +199,7 @@ export function SummaryView() {
             )}
 
             {isValidMonth(month) && summary.isPending && (
-                <p className="text-sm text-slate-500">Calcul du résumé…</p>
+                <Loading label="Calcul du résumé…" />
             )}
 
             {summary.isError && (

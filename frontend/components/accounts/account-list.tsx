@@ -5,13 +5,14 @@ import { formatAmount } from '@/lib/money';
 import { useAccounts, useDeleteAccount } from '@/lib/queries/accounts';
 import { ACCOUNT_TYPE_LABELS } from '@/lib/types';
 import { Alert, Card, dangerButtonClass, secondaryButtonClass } from '@/components/ui';
+import {Loading} from "@/components/loading";
 
 export function AccountList() {
     const { data: accounts, isPending, isError, error, refetch } = useAccounts();
     const remove = useDeleteAccount();
 
     if (isPending) {
-        return <p className="text-sm text-slate-500">Chargement des comptes…</p>;
+        return <Loading label="Chargement des comptes…" />;
     }
 
     if (isError) {
